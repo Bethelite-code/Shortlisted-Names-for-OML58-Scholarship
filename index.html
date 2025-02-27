@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Between Documents</title>
+    <style>
+        /* Reset body styles and center content */
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        /* Style for the main heading */
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        /* Style for the iframe (PDF viewer) */
+        iframe {
+            width: 90%;                     /* Make the iframe take up 90% of the screen width */
+            height: 600px;                 /* Set a fixed height for the PDF viewer */
+            border: none;                 /* Remove the border around the iframe */
+        }
+
+        /* Container for the buttons */
+        .btn-container {
+            margin-bottom: 20px;
+        }
+
+        /* Style for the buttons */
+        button {
+            padding: 10px 20px;           /* Add padding inside the button */
+            font-size: 16px;              /* Set font size */
+            margin: 5px;                  /* Add margin between buttons */
+            cursor: pointer;              /* Show pointer cursor on hover */
+            border: none;                 /* Remove button border */
+            background-color: #6200ea;    /* Set button background color */
+            color: #fff;                  /* Set button text color */
+            border-radius: 5px;           /* Round button corners */
+        }
+
+        /* Change button color on hover */
+        button:hover {
+            background-color: #3700b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Main heading -->
+    <h1>View Only Documents</h1>
+
+    <!-- Button container to switch between documents -->
+    <div class="btn-container">
+        <button onclick="showPDF('/docs/file1.pdf')">View Document 1</button>
+        <button onclick="showPDF('/docs/file2.pdf')">View Document 2</button>
+    </div>
+
+    <!-- iFrame to display the PDF -->
+    <iframe id="pdfViewer" src="/docs/file1.pdf"></iframe>
+
+    <script>
+        // Function to switch the PDF file in the iframe
+        function showPDF(pdfPath) {
+            document.getElementById('pdfViewer').src = pdfPath;
+        }
+
+        // Disable right-click to prevent "Save as" or other context menu options
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Disable common keyboard shortcuts for saving, printing, or viewing source
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
+                e.preventDefault();
+                alert("Download and print options are disabled!");
+            }
+        });
+    </script>
+</body>
+</html>
